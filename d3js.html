@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<p>第一行</p>
+		<p>第二行</p>
+		<div>行1</div>
+		<div>行2</div>
+		<div>行3</div>
+	</body>
+	<script type="text/javascript">
+		var p = d3.select("body").selectAll("p").text("第一个d3程序");
+		p.style("color","red")
+		 .style("font-size","14px");
+		 
+		//单个数据是替换 
+		var str = "china"; 
+		var body = d3.select("body");
+		var div = body.selectAll("div");
+		div.datum(str)
+			.text(function(d,i){
+				return 'no: '+i+" is "+d;
+			})
+		
+		//数组设置是一一对应
+//		var dataSet = ["dog","cat","kitty"];
+//		var body = d3.select("body");
+//		var div = body.selectAll("div");
+//		div.data(dataSet)
+//			.text(function(d,i){
+//				return d;
+//			})
+	</script> 
+</html>

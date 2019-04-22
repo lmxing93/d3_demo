@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+	</head>
+	<style type="text/css">
+		.circleBox{
+		  position: relative;
+		  width: 150px;
+		  height: 150px;
+		  margin: 0 auto
+		}
+		
+		.circleText{
+		  position: absolute;
+		  width: 80px;
+		  height: 80px;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  text-align: center;
+		  line-height: 80px;
+		  border-radius: 50%;
+		  background-color: #fff;
+		}
+
+	</style>
+	<body>
+		<div class="circleBox">
+      <!-- 弧形 -->
+      <canvas id="tutorial" width="150" height="150"></canvas>
+      <!-- 弧形中间的空白部分 -->
+      <div class="circleText">
+      </div>
+    </div>
+
+	</body>
+	
+	
+	<script type="text/javascript">
+		
+//		https://blog.csdn.net/csdn9_14/article/details/53426622
+		function draw(){
+		      // 获取canvas DOM节点
+		      var canvas = $("tutorial");
+		      if(canvas.getContext) {
+		        // 获取绘画上下文
+		        var ctx = canvas.getContext("2d")
+		        // 设置渐变背景
+		        var lineargradient = ctx.createLinearGradient(0, 0, 150, 150)
+		        lineargradient.addColorStop(0, 'white')
+		        lineargradient.addColorStop(1, 'black')
+		        // 开始绘画
+		        ctx.beginPath()
+		        // 画圆的函数，四个参数分别为x, y（坐标）, radius（半径）, angle（环形半径）, direction（环形方向，顺时针或者逆时针）
+		        // angle是我定义的一个变量，控制角度用的。一个完整的圆是Math.PI*2，angle把2均分之后的对应值
+		        ctx.arc(75, 75, 50, 0, Math.PI*this.angle*0.1, false)
+		        // 移动笔触到圆心
+		        ctx.lineTo(75, 75)
+		        // 闭合路径
+		        ctx.closePath()
+		        // 根据弧度选择填色色彩
+		        if(this.angle>0 && this.angle<=9) {
+		          ctx.fillStyle = lineargradient
+		        } else if(this.angle > 9 && this.angle <= 15) {
+		          ctx.fillStyle = 'green'
+		        } else if (this.angle >= 20) {
+		            ctx.fillStyle = 'orange'
+		        } else {
+		          ctx.fillStyle = 'blue'
+		        }
+		      // 填色
+		        ctx.fill()
+      		}
+		}
+		
+		draw()
+	</script> 
+</html>
+
